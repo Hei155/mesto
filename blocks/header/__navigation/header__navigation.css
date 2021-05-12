@@ -1,0 +1,6 @@
+.header__navigation {
+    width: calc(100% - 400px);
+    margin: 0 auto;
+    padding-top: 45px;
+    padding-bottom: 41px;
+}
