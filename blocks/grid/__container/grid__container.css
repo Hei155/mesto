@@ -1,0 +1,6 @@
+.grid__container {
+    display: flex;
+    background-color: #E5E5E5;
+    justify-content: space-between;
+    max-width: 282px;
+}

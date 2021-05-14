@@ -1,0 +1,9 @@
+.grid__container_text {
+    margin: 0;
+    padding-left: 21px;
+    padding-top: 25px;  
+    padding-bottom: 31px;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 29px;
+}
