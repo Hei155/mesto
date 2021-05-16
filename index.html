@@ -6,12 +6,11 @@
         <link rel="stylesheet" href="pages/index.css">
         <title>Mesto</title>
     </head>
-</html>
 <body>
     <div class="page">
         <header class="header">
             <nav class="header__navigation">
-                <img src="images/Vector.svg" alt="Лого">
+                <img src="images/Vector.svg" alt="Лого" class="header__logo">
             </nav>
             <div class="line"></div>
         </header>
@@ -19,13 +18,17 @@
             <section class="menu">
                 <div class="menu__panel">
                     <div class="menu__profile">
-                        <img src="images/Avatar.png" alt="Жак-Ив Кусто">
+                        <img src="images/Avatar.png" alt="Жак-Ив Кусто" class="menu__avatar">
                         <div class="menu__container">
-                            <h1 class="menu__container_name">Жак-Ив Кусто</h1>
-                            <p class="menu__container_description">Исследователь океана</p>
+                            <div class="menu__inf">
+                                <h1 class="menu__name">Жак-Ив Кусто</h1>
+                                <p class="menu__description">Исследователь океана</p>
+                            </div>
+                            <button class="menu__edit"><img src="images/Edit.svg" class="menu__edit-pic" alt="Редактировать"></button>
                         </div>
+                        
                     </div>
-                    <button class="menu__button"></button>
+                    <button class="menu__button"><img src="images/Button.svg" class="menu__button-pic" alt="Добавить"></button>
                 </div>
             </section>
             <section class="pictures"> 
@@ -33,47 +36,63 @@
                     <div class="grid__card">
                         <img class="grid__image" src="images/Karachevsk.jpg" alt="Карачевск">
                         <div class="grid__container">
-                            <h3 class="grid__container_text">Карачевск</h3>
-                            <button class="grid__container_button"><img src="images/Like.svg" class="grid__container_like"></button>
+                            <h3 class="grid__text">Карачевск</h3>
+                            <button class="grid__button"><img src="images/Like.svg" class="grid__like" alt="Нравится"></button>
                         </div>
                     </div>
                     <div class="grid__card">
                         <img class="grid__image" src="images/Elbrus.jpg" alt="Эльбрус">
                         <div class="grid__container">
-                            <h3 class="grid__container_text">Гора Эльбрус</h3>
-                            <button class="grid__container_button"><img src="images/Like.svg" class="grid__container_like"></button>
+                            <h3 class="grid__text">Гора Эльбрус</h3>
+                            <button class="grid__button"><img src="images/Like.svg" class="grid__like" alt="Нравится"></button>
                         </div>
                     </div>
                     <div class="grid__card">
                         <img class="grid__image" src="images/Dombai.jpg" alt="Домбай">
                         <div class="grid__container">
-                            <h3 class="grid__container_text">Домбай</h3>
-                            <button class="grid__container_button"><img src="images/Like.svg" class="grid__container_like"></button>
+                            <h3 class="grid__text">Домбай</h3>
+                            <button class="grid__button"><img src="images/Like.svg" class="grid__like" alt="Нравится"></button>
                         </div>
                     </div>
                     <div class="grid__card">
                         <img class="grid__image" src="images/Elbrus.jpg" alt="Эльбрус">
                         <div class="grid__container">
-                            <h3 class="grid__container_text">Гора Эльбрус</h3>
-                            <button class="grid__container_button"><img src="images/Like.svg" class="grid__container_like"></button>
+                            <h3 class="grid__text">Гора Эльбрус</h3>
+                            <button class="grid__button"><img src="images/Like.svg" class="grid__like" alt="Нравится"></button>
                         </div>
                     </div>
                     <div class="grid__card">
                         <img class="grid__image" src="images/Dombai.jpg" alt="Домбай">
                         <div class="grid__container">
-                            <h3 class="grid__container_text">Домбай</h3>
-                            <button class="grid__container_button"><img src="images/Like.svg" class="grid__container_like"></button>
+                            <h3 class="grid__text">Домбай</h3>
+                            <button class="grid__button"><img src="images/Like.svg" class="grid__like" alt="Нравится"></button>
                         </div>
                     </div>
                     <div class="grid__card">
                         <img class="grid__image" src="images/Karachevsk.jpg" alt="Карачевск">
                         <div class="grid__container">
-                            <h3 class="grid__container_text">Карачевск</h3>
-                            <button class="grid__container_button"><img src="images/Like.svg" class="grid__container_like"></button>
+                            <h3 class="grid__text">Карачаево-Черкесия</h3>
+                            <button class="grid__button"><img src="images/Like.svg" class="grid__like" alt="Нравится"></button>
                         </div>
                     </div>
                 </div>
             </section>
+            <section class="popup  popup_toggle">
+                <div class="popup__container">
+                    <img class="popup__close" src="images/Close-Icon.svg" alt="Закрыть">
+                    <h2 class="popup__title">Редактировать профиль</h2>
+                    <input class="popup__input" id="name">
+                    <input class="popup__input" id="description">
+                    <button class="popup__button">Сохранить</button>
+                </div>
+            </section>
         </main>
+        <footer class="footer">
+            <div class="footer__container">
+                <p class="footer__text">&copy; 2020 Mesto Russia</p>
+            </div>
+        </footer>
     </div>
+    <script src="scripts/main.js"></script>
 </body>
+</html>

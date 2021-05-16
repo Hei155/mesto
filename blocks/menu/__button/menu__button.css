@@ -2,4 +2,21 @@
     width: 150px;
     height: 50px;
     align-self: center;
+    background-color: transparent;
+    padding: 0;
+    border: 2px solid #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 2px;
+    transition: ease-in-out .2s;
+    cursor: pointer;
+}
+
+.menu__button:hover {
+    opacity: 0.6;
+}
+
+@media screen and (max-width: 1279px) {
+    .menu__button {
+        width: 100%;
+    }
 }
