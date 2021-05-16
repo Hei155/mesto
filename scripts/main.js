@@ -22,15 +22,13 @@ function saveChanges() {
 let activeButton = document.querySelectorAll('.grid__like');
 for (let i = 0; i <= activeButton.length - 1; i+=1) {
     activeButton[i].addEventListener('click', function(){
-        if (activeButton[i].src !== 'file:///C:/Users/Igor/Desktop/Projects/dev/mesto/images/buttonActive.svg') {
-            console.log('правда')
-            console.log(activeButton[i].src)
-            activeButton[i].setAttribute('src', 'images/buttonActive.svg')
-        }
-        else if (activeButton[i].src !== 'file:///C:/Users/Igor/Desktop/Projects/dev/mesto/images/Like.svg') {
-            console.log('ложь')
-            console.log(activeButton[i].src)
+        if (activeButton[i].hasAttribute('active')) {
             activeButton[i].setAttribute('src', 'images/Like.svg')
+            activeButton[i].removeAttribute('active')
+        }
+        else  {
+            activeButton[i].setAttribute('src', 'images/buttonActive.svg')
+            activeButton[i].setAttribute('active', 'like_active')
         }
     })
 };
