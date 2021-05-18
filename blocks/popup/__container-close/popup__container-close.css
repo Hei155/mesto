@@ -1,0 +1,18 @@
+.popup__container-close {
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: ease-in-out .2s;
+    background: transparent;
+    position: absolute;
+    left: 420px;
+    top: -50px;
+}
+
+@media screen and (max-width: 767px) {
+    .popup__container-close {
+        width: 26px;
+        top: -39.62px;
+        left: 255px;
+    }
+}

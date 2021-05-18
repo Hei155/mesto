@@ -6,6 +6,8 @@
     margin: 0;
     margin-top: 22px;
     margin-bottom: 16px;
+    overflow-wrap: break-word;
+    
 }
 
 @media screen and (max-width: 767px) {

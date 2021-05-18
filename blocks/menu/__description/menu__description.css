@@ -4,6 +4,7 @@
     line-height: 22px;
     color: #FFFFFF;
     margin: 0;
+    overflow-wrap: break-word;
 }
 
 @media screen and (max-width: 1279px) {
