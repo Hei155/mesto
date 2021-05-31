@@ -27,50 +27,8 @@
                     <button class="menu__button" type="button"><img src="images/Button.svg" class="menu__button-pic" alt="Добавить"></button>
                 </div>
             </section>
-            <section class="pictures"> 
-                <div class="grid">
-                    <div class="grid__card">
-                        <img class="grid__image" src="images/Karachevsk.jpg" alt="Карачевск">
-                        <div class="grid__container">
-                            <h2 class="grid__text">Карачевск</h2>
-                            <button class="grid__button" type="button"><img src="images/Like.svg" class="grid__like" alt="Нравится"></button>
-                        </div>
-                    </div>
-                    <div class="grid__card">
-                        <img class="grid__image" src="images/Elbrus.jpg" alt="Эльбрус">
-                        <div class="grid__container">
-                            <h2 class="grid__text">Гора Эльбрус</h2>
-                            <button class="grid__button" type="button"><img src="images/Like.svg" class="grid__like" alt="Нравится"></button>
-                        </div>
-                    </div>
-                    <div class="grid__card">
-                        <img class="grid__image" src="images/Dombai.jpg" alt="Домбай">
-                        <div class="grid__container">
-                            <h2 class="grid__text">Домбай</h2>
-                            <button class="grid__button" type="button"><img src="images/Like.svg" class="grid__like" alt="Нравится"></button>
-                        </div>
-                    </div>
-                    <div class="grid__card">
-                        <img class="grid__image" src="images/Elbrus.jpg" alt="Эльбрус">
-                        <div class="grid__container">
-                            <h2 class="grid__text">Гора Эльбрус</h2>
-                            <button class="grid__button" type="button"><img src="images/Like.svg" class="grid__like" alt="Нравится"></button>
-                        </div>
-                    </div>
-                    <div class="grid__card">
-                        <img class="grid__image" src="images/Dombai.jpg" alt="Домбай">
-                        <div class="grid__container">
-                            <h2 class="grid__text">Домбай</h2>
-                            <button class="grid__button" type="button"><img src="images/Like.svg" class="grid__like" alt="Нравится"></button>
-                        </div>
-                    </div>
-                    <div class="grid__card">
-                        <img class="grid__image" src="images/Karachevsk.jpg" alt="Карачевск">
-                        <div class="grid__container">
-                            <h2 class="grid__text">Карачаево-Черкесия</h2>
-                            <button class="grid__button" type="button"><img src="images/Like.svg" class="grid__like" alt="Нравится"></button>
-                        </div>
-                    </div>
+            <section class="pictures">
+                <div class="grid">                  
                 </div>
             </section>
             <section class="popup  popup_toggle">
@@ -81,6 +39,17 @@
                         <input class="popup__input" id="name" name="Name" type="text" value="">
                         <input class="popup__input" id="description" name="description" type="text" value="">
                         <button class="popup__button" type="submit" aria-label="Сохранить">Сохранить</button>
+                    </form>
+                </div>
+            </section>
+            <section class="photo-editor photo-editor_toggle">
+                <div class="photo-editor__container">
+                    <button class="photo-editor__container-close" type="button"><img class="photo-editor__close" src="images/Close-Icon.svg" alt="Закрыть"></button>
+                    <h2 class="photo-editor__title">Новое место</h2>
+                    <form class="photo-editor__info" name="profileInput">
+                        <input class="photo-editor__input" id="photoName" name="Name" type="text" value="Название">
+                        <input class="photo-editor__input" id="photoLink" name="description" type="text" value="Ссылка на картинку">
+                        <button class="photo-editor__button" type="submit" aria-label="Сохранить">Создать</button>
                     </form>
                 </div>
             </section>

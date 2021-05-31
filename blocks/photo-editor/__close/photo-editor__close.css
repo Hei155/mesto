@@ -1,0 +1,15 @@
+.photo-editor__close {
+    cursor: pointer;
+    transition: opacity .2s ease-in-out;
+    background: transparent;
+}
+
+.photo-editor__close:hover {
+    opacity: .6;
+}
+
+@media screen and (max-width: 767px) {
+    .photo-editor__close {
+        width: 30px;
+    }
+}

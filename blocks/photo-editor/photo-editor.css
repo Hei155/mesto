@@ -1,4 +1,4 @@
-.popup {
+.photo-editor {
     margin: 0 auto;
     position: fixed;
     top: 0;
@@ -10,8 +10,7 @@
     transition: visibility 0.5s, opacity 0.3s, background-color .6s linear;
 }
 
-.popup > .popup__container {
+.photo-editor > .photo-editor__container {
     opacity: 1;
     transition: visibility 0.5s, opacity 0.3s linear;
 }
-

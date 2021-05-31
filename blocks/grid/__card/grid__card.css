@@ -1,3 +1,4 @@
 .grid__card {
     width: 100%;
+    position: relative;
 }

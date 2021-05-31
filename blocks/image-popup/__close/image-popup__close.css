@@ -1,0 +1,13 @@
+.image-popup__close {
+    width: 40.7px;
+    height: 40.7px;
+    position: absolute;
+    left: 99.5%;
+    top: -7%;
+    cursor: pointer;
+    transition: ease-in-out .2s;
+}
+
+.image-popup__close:hover {
+    opacity: .6;
+}
