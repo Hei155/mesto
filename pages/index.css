@@ -32,17 +32,7 @@
 @import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/_toggle/popup_toggle.css);
 @import url(../blocks/popup/__info/popup__info.css);
-@import url(../blocks/photo-editor/photo-editor.css);
-@import url(../blocks/photo-editor/__button/photo-editor__button.css);
-@import url(../blocks/photo-editor/__close/photo-editor__close.css);
-@import url(../blocks/photo-editor/__container-close/photo-editor_container-close.css);
-@import url(../blocks/photo-editor/__container/photo-editor__container.css);
-@import url(../blocks/photo-editor/__info/photo-editor__info.css);
-@import url(../blocks/photo-editor/__input/photo-editor__input.css);
-@import url(../blocks/photo-editor/__title/photo-editor__title.css);
-@import url(../blocks/photo-editor/_toggle/photo-editor_toggle.css);
 @import url(../blocks/image-popup/image-popup.css);
-@import url(../blocks/image-popup/_toggle/image-popup_toggle.css);
 @import url(../blocks/image-popup/__container/image-popup__container.css);
 @import url(../blocks/image-popup/__photo/image-popup__photo.css);
 @import url(../blocks/image-popup/__close/image-popup__close.css);

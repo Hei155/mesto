@@ -1,5 +1,0 @@
-.image-popup_toggle {
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0.5s, opacity 0.3s linear;
-}
