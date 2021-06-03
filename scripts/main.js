@@ -45,10 +45,13 @@ function getCardElement(name, link) {
   const imagePopup = document.querySelector('.image-popup');
   const imagePopupClose = document.querySelector('.image-popup__close');
   const imagePopupLink = document.querySelector('.image-popup__photo')
+  const imagePopupName = document.querySelector('.image-popup__name')
   htmlElement.querySelector('.card__image').setAttribute('src', link);
   htmlElement.querySelector('.card__image').setAttribute('alt', name);
   htmlElement.querySelector('.card__image').addEventListener('click', function(){
     imagePopupLink.setAttribute('src', link);
+    imagePopupLink.setAttribute('alt', name);
+    imagePopupName.innerText = name;
     opPopup(imagePopup);
   })
   imagePopupClose.addEventListener('click', function() {
