@@ -42,7 +42,7 @@ const initialCards = [
 function getCardElement(name, link) {
   const cardTemplate = document.querySelector('.card__template').content;
   const htmlElement = cardTemplate.cloneNode(true);
-  const imagePopup = document.querySelector('.image');
+  const imagePopup = document.querySelector('.image-popup');
   const imagePopupClose = document.querySelector('.image-popup__close');
   const imagePopupLink = document.querySelector('.image-popup__photo')
   const imagePopupName = document.querySelector('.image-popup__name')
@@ -87,11 +87,11 @@ function renderCard(name, link, block) {
 };
 
 function opPopup(data) {
-  data.classList.remove('popup_toggle');
+  data.classList.remove('toggle');
 };
 
 function clsPopup(data) {
-  data.classList.add('popup_toggle');
+  data.classList.add('toggle');
 }
 
 function addPhoto(event) {
