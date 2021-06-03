@@ -1,4 +1,4 @@
-.image-popup {
+.image {
     position: fixed;
     z-index: 3;
     top: 0;
@@ -11,7 +11,7 @@
     transition: visibility 0.5s, opacity 0.3s, background-color .6s linear;
 }
 
-.image-popup > .image-popup__container {
+.image > .image-popup__container {
     opacity: 1;
     transition: visibility 0.5s, opacity 0.3s linear;
 }

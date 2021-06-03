@@ -42,7 +42,7 @@ const initialCards = [
 function getCardElement(name, link) {
   const cardTemplate = document.querySelector('.card__template').content;
   const htmlElement = cardTemplate.cloneNode(true);
-  const imagePopup = document.querySelector('.image-popup');
+  const imagePopup = document.querySelector('.image');
   const imagePopupClose = document.querySelector('.image-popup__close');
   const imagePopupLink = document.querySelector('.image-popup__photo')
   const imagePopupName = document.querySelector('.image-popup__name')
