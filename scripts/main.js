@@ -42,71 +42,59 @@ const initialCards = [
 function getCardElement(name, link) {
   const cardTemplate = document.querySelector('.card__template').content;
   const htmlElement = cardTemplate.cloneNode(true);
-  htmlElement.querySelector('.grid__image').setAttribute('src', link);
-  htmlElement.querySelector('.grid__image').setAttribute('alt', name);
-  htmlElement.querySelector('.grid__text').innerText = name;
-  htmlElement.querySelector('.image-popup__photo').setAttribute('src', link);
-  htmlElement.querySelector('.image-popup__photo').setAttribute('alt', name);
-  htmlElement.querySelector('.image-popup__name').innerText = name;
-  const closeImage = htmlElement.querySelector('.image-popup__close');
-  const openImage = htmlElement.querySelector('.image-popup');
-  const image = htmlElement.querySelector('.grid__image');
-  image.addEventListener('click', function(){
-    buttonTogglePopup(openImage);
-  });
-  closeImage.addEventListener('click', function(){
-    buttonTogglePopup(openImage)
-  });
-  const activeButton = htmlElement.querySelector('.grid__like'); 
-  activeButton.addEventListener('click', function(){ 
-    if (activeButton.hasAttribute('active')) { 
-        activeButton.setAttribute('src', 'images/Like.svg') 
-        activeButton.removeAttribute('active') 
-    } 
-    else  { 
-        activeButton.setAttribute('src', 'images/buttonActive.svg') 
-        activeButton.setAttribute('active', 'like_active') 
-    } 
+  const imagePopup = document.querySelector('.image-popup');
+  const imagePopupClose = document.querySelector('.image-popup__close');
+  const imagePopupLink = document.querySelector('.image-popup__photo')
+  htmlElement.querySelector('.card__image').setAttribute('src', link);
+  htmlElement.querySelector('.card__image').setAttribute('alt', name);
+  htmlElement.querySelector('.card__image').addEventListener('click', function(){
+    imagePopupLink.setAttribute('src', link);
+    opPopup(imagePopup);
+  })
+  imagePopupClose.addEventListener('click', function() {
+    clsPopup(imagePopup)
+  })
+  htmlElement.querySelector('.card__text').innerText = name;
+  const activeButton = htmlElement.querySelector('.card__button'); 
+  activeButton.addEventListener('click', function(){
+    activeButton.classList.toggle('card__button_is-active')
   })
   const card = htmlElement.querySelector('.grid__card');
-  const deletePic = htmlElement.querySelector('.grid__delete');
+  const deletePic = htmlElement.querySelector('.card__delete');
   deletePic.addEventListener('click', function(){
   card.remove()
     })
   return htmlElement;
 }
 
-function renderCard(name, link, gridContainer) {
-  if (initialCards[5] !== null) {
-    for (let index = 0; index < initialCards.length; index++) {
-      gridContainer = document.querySelector('.grid');
-      name = initialCards[index].name;
-      link = initialCards[index].link;
-      gridContainer.append(getCardElement(name, link))
-      initialCards[index] = null;
-    }
+initialCards.forEach((index) => {
+  const gridContainer = document.querySelector('.grid');
+  renderCard(index.name, index.link, gridContainer)
+});
+
+function renderCard(name, link, block) {
+  const gridCard = document.querySelectorAll('.grid__card');
+  const gridCardArray = Array.from(gridCard); 
+  if (gridCardArray.length <= 5) {
+    block.append(getCardElement(name, link))
   }
   else {
-    gridContainer = document.querySelector('.grid');
-    name = inputNamePhoto.value;
-    link = inputLink.value;
-    gridContainer.prepend(getCardElement(name, link))
+    block.prepend(getCardElement(name, link))
   }
-}
-
-function buttonTogglePopup(data) {
-  data.classList.toggle('popup_toggle');
-  if (!data.classList.contains('popup_toggle')) {
-    inputName.placeholder = nameIn.textContent;
-    inputDescription.placeholder = description.textContent;
-}
 };
 
+function opPopup(data) {
+  data.classList.remove('popup_toggle');
+};
+
+function clsPopup(data) {
+  data.classList.add('popup_toggle');
+}
+
 function addPhoto(event) {
+  const gridContainer = document.querySelector('.grid');
   event.preventDefault();
-  renderCard();
-  inputNamePhoto.placeholder = nameIn.textContent;
-  inputLink.placeholder = description.textContent;
+  renderCard(inputNamePhoto.value, inputLink.value, gridContainer);
 };
 
 function saveChanges(event) {
@@ -115,21 +103,28 @@ function saveChanges(event) {
     description.textContent = inputDescription.value;
 }
 
-renderCard();
-
 submitPhoto.addEventListener('submit', function() {
   addPhoto(event);
-  buttonTogglePopup(imageEditor);
+  clsPopup(imageEditor);
+  inputNamePhoto.value = "";
+  inputLink.value = "";
 })
 openProfile.addEventListener('click', function () {
-  buttonTogglePopup(imageEditor)});
+  opPopup(imageEditor);
+});
 closeProfile.addEventListener('click', function () {
-  buttonTogglePopup(imageEditor)});
+  clsPopup(imageEditor);
+});
 closePopup.addEventListener('click', function () {
-  buttonTogglePopup(profileEditor)});
+  clsPopup(profileEditor)
+});
 openPopup.addEventListener('click', function () {
-  buttonTogglePopup(profileEditor)});
+  opPopup(profileEditor)
+  inputName.value = nameIn.textContent;
+  inputDescription.value = description.textContent;
+}); 
 form.addEventListener('submit', function() {
   saveChanges(event);
-  buttonTogglePopup(profileEditor);
+  clsPopup(profileEditor);
 });
+

@@ -53,6 +53,13 @@
                     </form>
                 </div>
             </section>
+            <section class="image-popup popup_toggle">
+                <div class="image-popup__container">
+                    <img class="image-popup__photo" src="" alt="">
+                    <img class="image-popup__close" src="images/Close-Icon.svg">
+                    <p class="image-popup__name"></p>
+                </div>
+            </section>
         </main>
         <footer class="footer">
             <p class="footer__text">&copy; 2020 Mesto Russia</p>
@@ -60,20 +67,13 @@
     </div>
     <template class="card__template">
         <div class="grid__card"> 
-            <img class="grid__image" src="${element.link}" alt="${element.name}">
-            <img class="grid__delete" src="images/Delete.svg">
-            <div class="grid__container"> 
-              <h2 class="grid__text">${element.name}</h2> 
-              <button class="grid__button" type="button"><img src="images/Like.svg" class="grid__like" alt="Нравится"></button> 
+            <img class="card__image" src="${element.link}" alt="${element.name}">
+            <img class="card__delete" src="images/Delete.svg">
+            <div class="card__container"> 
+              <h2 class="card__text">${element.name}</h2> 
+              <button class="card__button card__button_is-active" type="button"></button> 
             </div> 
-            <div class="image-popup popup_toggle">
-              <div class="image-popup__container">
-                <img class="image-popup__photo" src="${element.link}" alt="${element.name}">
-                <img class="image-popup__close" src="images/Close-Icon.svg">
-                <p class="image-popup__name">${element.name}</p>
-              </div>
-            </div>
-          </div>
+        </div>
     </template>
     <script src="scripts/main.js"></script>
 </body>

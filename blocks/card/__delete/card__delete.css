@@ -1,4 +1,4 @@
-.grid__delete {
+.card__delete {
     position: absolute;
     top: 18px;
     right: 15px;
@@ -6,6 +6,6 @@
     transition: ease-in-out .2s;
 }
 
-.grid__delete:hover {
+.card__delete:hover {
     opacity: .5;
 }
