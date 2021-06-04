@@ -13,7 +13,7 @@ const submitPhoto = document.querySelector('#cardInf');
 const inputNamePhoto = document.querySelector('#photoName');
 const inputLink = document.querySelector('#photoLink');
 const profileEditor = document.getElementById('profileEditor');
-const imagePopupCloseBtn = document.querySelector('.image__close')
+const imagePopupCloseBtn = document.querySelector('.popup__image-close')
 const initialCards = [
   {
     name: 'Архыз',
@@ -44,8 +44,8 @@ const initialCards = [
 function getCardElement(name, link) {
   const cardTemplate = document.querySelector('.card__template').content;
   const htmlElement = cardTemplate.cloneNode(true);
-  const imagePopupLink = document.querySelector('.image__photo')
-  const imagePopupName = document.querySelector('.image__name')
+  const imagePopupLink = document.querySelector('.popup__photo')
+  const imagePopupName = document.querySelector('.popup__name')
   htmlElement.querySelector('.card__image').setAttribute('src', link);
   htmlElement.querySelector('.card__image').setAttribute('alt', name);
   htmlElement.querySelector('.card__image').addEventListener('click', function(){
