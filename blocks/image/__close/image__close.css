@@ -1,4 +1,4 @@
-.image-popup__close {
+.image__close {
     border: none;
     width: 40.7px;
     height: 40.7px;
@@ -11,12 +11,12 @@
     background: url(../../../images/Close-Icon.svg) no-repeat center;
 }
 
-.image-popup__close:hover {
+.image__close:hover {
     opacity: .6;
 }
 
 @media screen and (max-width: 424px) {
-    .image-popup__close {
+    .image__close {
         width: 26px;
         height: 26px;
         top: -53.92px;
