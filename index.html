@@ -21,30 +21,30 @@
                                 <h1 class="menu__name">Жак-Ив Кусто</h1>
                                 <p class="menu__description">Исследователь океана</p>
                             </div>
-                            <button class="menu__edit" type="button"><img src="images/Edit.svg" class="menu__edit-pic" alt="Редактировать"></button>
+                            <button class="menu__edit" type="button"><img class="menu__edit-pic" src="images/Edit.svg"></button>
                         </div>
                     </div>
-                    <button class="menu__button" type="button"><img src="images/Button.svg" class="menu__button-pic" alt="Добавить"></button>
+                    <button class="menu__button" type="button"></button>
                 </div>
             </section>
             <section class="pictures">
                 <div class="grid">                  
                 </div>
             </section>
-            <section class="popup toggle" id="profileEditor">
+            <section class="popup" id="profileEditor">
                 <div class="popup__container">
-                    <button class="popup__container-close" type="button"><img class="popup__close" id="profileEditorClose" src="images/Close-Icon.svg" alt="Закрыть"></button>
+                    <button class="popup__container-close" type="button" id="profileEditorClose"></button>
                     <h2 class="popup__title">Редактировать профиль</h2>
                     <form class="popup__info" name="profileInput" id="popupInf">
-                        <input class="popup__input" id="name" name="Name" type="text" value="" placeholder="">
-                        <input class="popup__input" id="description" name="description" type="text" value="" placeholder="">
+                        <input class="popup__input" id="name" name="Name" type="text" value="" placeholder="Имя">
+                        <input class="popup__input" id="description" name="description" type="text" value="" placeholder="Профессия">
                         <button class="popup__button" type="submit" aria-label="Сохранить">Сохранить</button>
                     </form>
                 </div>
             </section>
-            <section class="popup toggle" id="imageEditor">
+            <section class="popup" id="imageEditor">
                 <div class="popup__container">
-                    <button class="popup__container-close" type="button"><img class="popup__close" id="imageEditorClose" src="images/Close-Icon.svg" alt="Закрыть"></button>
+                    <button class="popup__container-close" type="button" id="imageEditorClose"></button>
                     <h2 class="popup__title">Новое место</h2>
                     <form class="popup__info" name="photoInput" id="cardInf">
                         <input class="popup__input" id="photoName" name="Name" type="text" value="" placeholder="Название">
@@ -53,14 +53,14 @@
                     </form>
                 </div>
             </section>
-            <section class="image-popup toggle">
+            <section class="popup popup-opacity" id="imagePopup">
                 <div class="image-popup__container">
                     <img class="image-popup__photo" src="#" alt="#">
-                    <img class="image-popup__close" src="images/Close-Icon.svg">
+                    <button class="image-popup__close"></button>
                     <p class="image-popup__name"></p>
                 </div>
             </section>
-        </main>
+        </main> 
         <footer class="footer">
             <p class="footer__text">&copy; 2020 Mesto Russia</p>
         </footer>
@@ -68,7 +68,7 @@
     <template class="card__template">
         <div class="grid__card"> 
             <img class="card__image" src="${element.link}" alt="${element.name}">
-            <img class="card__delete" src="images/Delete.svg">
+            <button class="card__delete-button"><img class="card__delete" src="images/Delete.svg"></button>
             <div class="card__container"> 
               <h2 class="card__text">${element.name}</h2> 
               <button class="card__button card__button_is-active" type="button"></button> 

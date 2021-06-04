@@ -1,4 +1,5 @@
 .popup {
+    visibility: hidden;
     margin: 0 auto;
     position: fixed;
     top: 0;
@@ -8,9 +9,6 @@
     display: flex;
     background-color: rgba(0, 0, 0, .5);
     transition: visibility 0.5s, opacity 0.3s, background-color .6s linear;
+    opacity: 0;
 }
 
-.popup > .popup__container {
-    opacity: 1;
-    transition: visibility 0.5s, opacity 0.3s linear;
-}

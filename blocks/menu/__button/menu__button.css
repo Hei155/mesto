@@ -3,7 +3,7 @@
     min-width: 150px;
     height: 50px;
     align-self: center;
-    background-color: transparent;
+    background: url(../../../images/Button.svg) no-repeat center;
     padding: 0;
     border: 2px solid #FFFFFF;
     box-sizing: border-box;

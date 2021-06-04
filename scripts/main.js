@@ -1,9 +1,10 @@
+const imagePopup = document.getElementById('imagePopup');
 const profile = document.querySelector('#imageEditor');
 const openProfile = document.querySelector('.menu__button');
 const closeProfile = document.querySelector('#imageEditorClose');
-const openPopup = document.querySelector('.menu__edit');
-const closePopup = document.querySelector('#profileEditorClose');
-const form = document.querySelector('#popupInf');
+const openWindowPopup = document.querySelector('.menu__edit');
+const closeWindowPopup = document.querySelector('#profileEditorClose');
+const profileForm = document.querySelector('#popupInf');
 const nameIn = document.querySelector('.menu__name');
 const description = document.querySelector('.menu__description');
 const inputName = document.querySelector('#name');
@@ -12,6 +13,7 @@ const submitPhoto = document.querySelector('#cardInf');
 const inputNamePhoto = document.querySelector('#photoName');
 const inputLink = document.querySelector('#photoLink');
 const profileEditor = document.getElementById('profileEditor');
+const imagePopupCloseBtn = document.querySelector('.image-popup__close')
 const initialCards = [
   {
     name: 'Архыз',
@@ -42,8 +44,6 @@ const initialCards = [
 function getCardElement(name, link) {
   const cardTemplate = document.querySelector('.card__template').content;
   const htmlElement = cardTemplate.cloneNode(true);
-  const imagePopup = document.querySelector('.image-popup');
-  const imagePopupClose = document.querySelector('.image-popup__close');
   const imagePopupLink = document.querySelector('.image-popup__photo')
   const imagePopupName = document.querySelector('.image-popup__name')
   htmlElement.querySelector('.card__image').setAttribute('src', link);
@@ -52,10 +52,7 @@ function getCardElement(name, link) {
     imagePopupLink.setAttribute('src', link);
     imagePopupLink.setAttribute('alt', name);
     imagePopupName.innerText = name;
-    opPopup(imagePopup);
-  })
-  imagePopupClose.addEventListener('click', function() {
-    clsPopup(imagePopup)
+    openPopup(imagePopup);
   })
   htmlElement.querySelector('.card__text').innerText = name;
   const activeButton = htmlElement.querySelector('.card__button'); 
@@ -86,48 +83,52 @@ function renderCard(name, link, block) {
   }
 };
 
-function opPopup(data) {
-  data.classList.remove('toggle');
+function openPopup(popup) {
+  popup.classList.add('popup-opened');
 };
 
-function clsPopup(data) {
-  data.classList.add('toggle');
+function closePopup(popup) {
+  popup.classList.remove('popup-opened');
 }
 
 function addPhoto(event) {
   const gridContainer = document.querySelector('.grid');
   event.preventDefault();
   renderCard(inputNamePhoto.value, inputLink.value, gridContainer);
+  closePopup(imageEditor);
+  inputNamePhoto.value = "";
+  inputLink.value = "";
 };
 
 function saveChanges(event) {
     event.preventDefault();
     nameIn.textContent = inputName.value;
     description.textContent = inputDescription.value;
+    closePopup(profileEditor);
 }
 
-submitPhoto.addEventListener('submit', function() {
-  addPhoto(event);
-  clsPopup(imageEditor);
-  inputNamePhoto.value = "";
-  inputLink.value = "";
-})
+imagePopupCloseBtn.addEventListener('click', function() {
+  closePopup(imagePopup)
+});
+
+submitPhoto.addEventListener('submit', addPhoto);
 openProfile.addEventListener('click', function () {
-  opPopup(imageEditor);
+  openPopup(imageEditor);
 });
+
 closeProfile.addEventListener('click', function () {
-  clsPopup(imageEditor);
+  closePopup(imageEditor);
 });
-closePopup.addEventListener('click', function () {
-  clsPopup(profileEditor)
+
+closeWindowPopup.addEventListener('click', function () {
+  closePopup(profileEditor)
 });
-openPopup.addEventListener('click', function () {
-  opPopup(profileEditor)
+
+openWindowPopup.addEventListener('click', function () {
+  openPopup(profileEditor)
   inputName.value = nameIn.textContent;
   inputDescription.value = description.textContent;
 }); 
-form.addEventListener('submit', function() {
-  saveChanges(event);
-  clsPopup(profileEditor);
-});
+
+profileForm.addEventListener('submit', saveChanges)
 
