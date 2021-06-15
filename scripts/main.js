@@ -13,7 +13,8 @@ const submitPhoto = document.querySelector('#cardInf');
 const inputNamePhoto = document.querySelector('#photoName');
 const inputLink = document.querySelector('#photoLink');
 const profileEditor = document.getElementById('profileEditor');
-const imagePopupCloseBtn = document.querySelector('.popup__image-close')
+const imagePopupCloseBtn = document.querySelector('.popup__image-close');
+const popupList = Array.from(document.querySelectorAll('.popup'));
 const initialCards = [
   {
     name: 'Архыз',
@@ -91,6 +92,19 @@ function closePopup(popup) {
   popup.classList.remove('popup-opened');
 }
 
+popupList.forEach((popup) => {
+  popup.addEventListener('click', function(evt) {
+    if (evt.target.classList[0] === "popup") {
+      closePopup(popup);
+    };
+  });
+  document.addEventListener('keydown', function(evt) {
+    if (evt.key === "Escape") {
+      closePopup(popup);
+    };
+  });
+});
+
 function addPhoto(event) {
   const gridContainer = document.querySelector('.grid');
   event.preventDefault();
@@ -105,13 +119,14 @@ function saveChanges(event) {
     nameIn.textContent = inputName.value;
     description.textContent = inputDescription.value;
     closePopup(profileEditor);
-}
+};
 
 imagePopupCloseBtn.addEventListener('click', function() {
-  closePopup(imagePopup)
+  closePopup(imagePopup);
 });
 
 submitPhoto.addEventListener('submit', addPhoto);
+
 openProfile.addEventListener('click', function () {
   openPopup(imageEditor);
 });

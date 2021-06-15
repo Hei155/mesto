@@ -35,10 +35,16 @@
                 <div class="popup__container">
                     <button class="popup__container-close" type="button" id="profileEditorClose"></button>
                     <h2 class="popup__title">Редактировать профиль</h2>
-                    <form class="popup__info" name="profileInput" id="popupInf">
-                        <input class="popup__input" id="name" name="Name" type="text" value="" placeholder="Имя">
-                        <input class="popup__input" id="description" name="description" type="text" value="" placeholder="Профессия">
-                        <button class="popup__button" type="submit" aria-label="Сохранить">Сохранить</button>
+                    <form class="popup__info" name="profileInput" id="popupInf" novalidate>
+                        <label class="popup__field">
+                            <input class="popup__input" id="name" name="Name" type="text" value="" placeholder="Имя" required minlength="2" maxlength="40">
+                            <span class="popup__input-error name-error"></span>
+                        </label>
+                        <label class="popup__field">
+                            <input class="popup__input" id="description" name="description" type="text" value="" placeholder="Профессия" required minlength="2" maxlength="200">
+                            <span class="popup__input-error description-error"></span>
+                        </label>
+                        <button class="popup__button" type="submit" aria-label="Сохранить" id="profileButton">Сохранить</button>
                     </form>
                 </div>
             </section>
@@ -47,9 +53,15 @@
                     <button class="popup__container-close" type="button" id="imageEditorClose"></button>
                     <h2 class="popup__title">Новое место</h2>
                     <form class="popup__info" name="photoInput" id="cardInf">
-                        <input class="popup__input" id="photoName" name="Name" type="text" value="" placeholder="Название">
-                        <input class="popup__input" id="photoLink" name="description" type="text" value="" placeholder="Ссылка на картинку">
-                        <button class="popup__button" type="submit" aria-label="Сохранить">Создать</button>
+                        <label class="popup__field">
+                            <input class="popup__input" id="photoName" name="Name" type="text" value="" placeholder="Название" required minlength="2" maxlength="30">
+                            <span class="popup__input-error photoName-error"></span>
+                            </label>
+                        <label class="popup__field">
+                            <input class="popup__input" id="photoLink" name="description" type="url" value="" placeholder="Ссылка на картинку" required>
+                            <span class="popup__input-error photoLink-error"></span>
+                        </label>
+                        <button class="popup__button popup__button_inactive" type="submit" aria-label="Сохранить" id="photoButton">Создать</button>
                     </form>
                 </div>
             </section>
@@ -76,5 +88,6 @@
         </div>
     </template>
     <script src="scripts/main.js"></script>
+    <script src="scripts/validate.js"></script>
 </body>
 </html>
