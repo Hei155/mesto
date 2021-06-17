@@ -18,6 +18,8 @@ const popupList = Array.from(document.querySelectorAll('.popup'));
 const cardTemplate = document.querySelector('.card-template').content;
 const imagePopupLink = document.querySelector('.popup__photo');
 const gridContainer = document.querySelector('.grid');
+const imagePopupName = document.querySelector('.popup__name');
+const photoButton = document.querySelector('#photoButton');
 const initialCards = [
   {
     name: 'Архыз',
@@ -44,10 +46,9 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-
+const htmlElement = cardTemplate.cloneNode(true);
 function getCardElement(name, link) {
   const htmlElement = cardTemplate.cloneNode(true);
-  const imagePopupName = document.querySelector('.popup__name');
   htmlElement.querySelector('.card__image').setAttribute('src', link);
   htmlElement.querySelector('.card__image').setAttribute('alt', name);
   htmlElement.querySelector('.card__image').addEventListener('click', function(){
@@ -104,17 +105,16 @@ popupList.forEach((popup) => {
 });
 
 function addPhoto(event) {
-  const firstButton = document.querySelector('#photoButton');
   event.preventDefault();
   renderCard(inputNamePhoto.value, inputLink.value, gridContainer);
   closePopup(imageEditor);
   inputNamePhoto.value = "";
   inputLink.value = "";
-  firstButton.disabled = true;
-  firstButton.classList.add('popup__button_inactive')      
+  photoButton.disabled = true;
+  photoButton.classList.add('popup__button_inactive')      
 };
 
-function saveChanges(event) {
+function saveChanges(event) { 
     event.preventDefault();
     nameIn.textContent = inputName.value;
     description.textContent = inputDescription.value;

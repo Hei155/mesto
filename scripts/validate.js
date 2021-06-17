@@ -1,5 +1,5 @@
 function showError(input, errorMessage, config) {
-    input.classList.add(config.inputError)
+    input.classList.add(config.inputErrorClass)
     const formError = document.querySelector(`.${input.id}-error`); 
     formError.textContent = errorMessage;
     profileButton.disabled = true;
@@ -7,7 +7,7 @@ function showError(input, errorMessage, config) {
 
 function hideError(input, config) {
     const formError = document.querySelector(`.${input.id}-error`); 
-    input.classList.remove(config.inputError)
+    input.classList.remove(config.inputErrorClass)
     formError.textContent = '';
 }
 
@@ -38,45 +38,26 @@ function checkButton(button, inputList, inactiveButtonClass) {
 }
 
 function enableValidation(config) {
-    const formFirstSelector = document.querySelector(config.formFirstSelector);
-    const formSecondSelector = document.querySelector(config.formSecondSelector)
-    const inputFirstPhotoSelector = formSecondSelector.querySelector(config.inputFirstPhotoSelector);
-    const inputSecondPhotoSelector = formSecondSelector.querySelector(config.inputSecondPhotoSelector);
-    inputFirstPhotoSelector.addEventListener('input', function() {
-        const submitFirstButtonSelector = formSecondSelector.querySelector(config.submitFirstButtonSelector);
-        const inputPhotoList = Array.from(formSecondSelector.querySelectorAll('.popup__input'));
-        checkButton(submitFirstButtonSelector, inputPhotoList, config.inactiveButtonClass);
-        checkInputValidity(inputFirstPhotoSelector);
-    });
-    inputSecondPhotoSelector.addEventListener('input', function() {
-        const submitFirstButtonSelector = formSecondSelector.querySelector(config.submitFirstButtonSelector);
-        const inputPhotoList = Array.from(formSecondSelector.querySelectorAll('.popup__input'));
-        checkButton(submitFirstButtonSelector, inputPhotoList, config.inactiveButtonClass);
-        checkInputValidity(inputSecondPhotoSelector);
-    })
-    formFirstSelector.addEventListener('input', function() {
-        const submitSecondButtonSelector = formFirstSelector.querySelector(config.submitSecondButtonSelector);
-        const inputProfileList = Array.from(formFirstSelector.querySelectorAll('.popup__input'));
-        const inputFirstProfileSelector = formFirstSelector.querySelector(config.inputFirstProfileSelector);
-        const inputSecondProfileSelector = formFirstSelector.querySelector(config.inputSecondProfileSelector);
-        checkButton(submitSecondButtonSelector, inputProfileList, config.inactiveButtonClass);
-        checkInputValidity(inputFirstProfileSelector);
-        checkInputValidity(inputSecondProfileSelector)
+    const  getFormList = Array.from(document.querySelectorAll(config.formSelector));
+    getFormList.forEach((form) => {
+        form.addEventListener('input', function() {
+            const submitButtonSelector = form.querySelector(config.submitButtonSelector);
+            const getInputList = Array.from(form.querySelectorAll(config.inputSelector));
+            getInputList.forEach((input) => {
+                checkInputValidity(input);
+            })
+            checkButton(submitButtonSelector, getInputList, config.inactiveButtonClass);
+        })
     });
 };
 
 const config = {
-    formFirstSelector: '#popupInf',
-    formSecondSelector: '#cardInf',
-    inputFirstProfileSelector: '#name',
-    inputSecondProfileSelector: '#description',
-    submitFirstButtonSelector: '#photoButton',
-    submitSecondButtonSelector: '#profileButton',
+    formSelector: '.popup__info',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__button',
     inactiveButtonClass: 'popup__button_inactive',
-    inputErrorClass: '.popup__input_type_error',
-    inputFirstPhotoSelector: '#photo-name',
-    inputSecondPhotoSelector: '#photo-link',
-}
+    inputErrorClass: 'popup__input_type_error',
+};
 
 enableValidation(config);
 
