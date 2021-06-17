@@ -1,22 +1,22 @@
-function showError(input, errorMessage) {
-    input.classList.add('popup__input_type_error')
+function showError(input, errorMessage, config) {
+    input.classList.add(config.inputError)
     const formError = document.querySelector(`.${input.id}-error`); 
     formError.textContent = errorMessage;
     profileButton.disabled = true;
 }
 
-function hideError(input) {
+function hideError(input, config) {
     const formError = document.querySelector(`.${input.id}-error`); 
-    input.classList.remove('popup__input_type_error')
+    input.classList.remove(config.inputError)
     formError.textContent = '';
 }
 
 function checkInputValidity(input) {
     if (!input.validity.valid) {
-        showError(input, input.validationMessage);
+        showError(input, input.validationMessage, config);
     }
     else {
-        hideError(input);
+        hideError(input, config);
     }
 };
 
@@ -26,51 +26,57 @@ function hasInvalidInput(inputList) {
   });
   }
 
-function checkButton(button, inputList) {
+function checkButton(button, inputList, inactiveButtonClass) {
     if (hasInvalidInput(inputList)) {
         button.disabled = true;
-        button.classList.add('popup__button_inactive')
+        button.classList.add(inactiveButtonClass)
     }
     else {
         button.removeAttribute('disabled');
-        button.classList.remove('popup__button_inactive')
+        button.classList.remove(inactiveButtonClass)
     }
 }
 
 function enableValidation(config) {
-    const inputPhotoElement = document.getElementById(config.inputPhotoElement);
-    const inputLinkElement = document.getElementById(config.inputLinkElement);
-    const formElementProfile = document.getElementById(config.formElementProfile);
-    inputPhotoElement.addEventListener('input', function() {
-        const photoButton = document.getElementById(config.photoButton);
-        const inputPhotoList = Array.from(document.forms.photoInput);
-        checkButton(photoButton, inputPhotoList);
-        checkInputValidity(inputPhotoElement);
+    const formFirstSelector = document.querySelector(config.formFirstSelector);
+    const formSecondSelector = document.querySelector(config.formSecondSelector)
+    const inputFirstPhotoSelector = formSecondSelector.querySelector(config.inputFirstPhotoSelector);
+    const inputSecondPhotoSelector = formSecondSelector.querySelector(config.inputSecondPhotoSelector);
+    inputFirstPhotoSelector.addEventListener('input', function() {
+        const submitFirstButtonSelector = formSecondSelector.querySelector(config.submitFirstButtonSelector);
+        const inputPhotoList = Array.from(formSecondSelector.querySelectorAll('.popup__input'));
+        checkButton(submitFirstButtonSelector, inputPhotoList, config.inactiveButtonClass);
+        checkInputValidity(inputFirstPhotoSelector);
     });
-    inputLinkElement.addEventListener('input', function() {
-        const photoButton = document.getElementById(config.photoButton);
-        const inputPhotoList = Array.from(document.forms.photoInput);
-        checkButton(photoButton, inputPhotoList);
-        checkInputValidity(inputLinkElement);
+    inputSecondPhotoSelector.addEventListener('input', function() {
+        const submitFirstButtonSelector = formSecondSelector.querySelector(config.submitFirstButtonSelector);
+        const inputPhotoList = Array.from(formSecondSelector.querySelectorAll('.popup__input'));
+        checkButton(submitFirstButtonSelector, inputPhotoList, config.inactiveButtonClass);
+        checkInputValidity(inputSecondPhotoSelector);
     })
-    formElementProfile.addEventListener('input', function() {
-        const profileButton = document.getElementById(config.profileButton);
-        const inputProfileList = Array.from(document.forms.profileInput);
-        const inputNameElement = document.getElementById(config.inputNameElement);
-        const inputDescriptionElement = document.getElementById(config.inputDescriptionElement);
-        checkButton(profileButton, inputProfileList);
-        checkInputValidity(inputNameElement);
-        checkInputValidity(inputDescriptionElement);
+    formFirstSelector.addEventListener('input', function() {
+        const submitSecondButtonSelector = formFirstSelector.querySelector(config.submitSecondButtonSelector);
+        const inputProfileList = Array.from(formFirstSelector.querySelectorAll('.popup__input'));
+        const inputFirstProfileSelector = formFirstSelector.querySelector(config.inputFirstProfileSelector);
+        const inputSecondProfileSelector = formFirstSelector.querySelector(config.inputSecondProfileSelector);
+        checkButton(submitSecondButtonSelector, inputProfileList, config.inactiveButtonClass);
+        checkInputValidity(inputFirstProfileSelector);
+        checkInputValidity(inputSecondProfileSelector)
     });
 };
 
-enableValidation({
-    inputPhotoElement: 'photoName',
-    photoButton: 'photoButton',
-    inputLinkElement: 'photoLink',
-    profileButton: 'profileButton',
-    inputNameElement: 'name',
-    inputDescriptionElement: 'description',
-    formElementProfile: 'popupInf'
-});
+const config = {
+    formFirstSelector: '#popupInf',
+    formSecondSelector: '#cardInf',
+    inputFirstProfileSelector: '#name',
+    inputSecondProfileSelector: '#description',
+    submitFirstButtonSelector: '#photoButton',
+    submitSecondButtonSelector: '#profileButton',
+    inactiveButtonClass: 'popup__button_inactive',
+    inputErrorClass: '.popup__input_type_error',
+    inputFirstPhotoSelector: '#photo-name',
+    inputSecondPhotoSelector: '#photo-link',
+}
+
+enableValidation(config);
 

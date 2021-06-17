@@ -10,11 +10,14 @@ const description = document.querySelector('.menu__description');
 const inputName = document.querySelector('#name');
 const inputDescription = document.querySelector('#description');
 const submitPhoto = document.querySelector('#cardInf');
-const inputNamePhoto = document.querySelector('#photoName');
-const inputLink = document.querySelector('#photoLink');
+const inputNamePhoto = document.querySelector('#photo-name');
+const inputLink = document.querySelector('#photo-link');
 const profileEditor = document.getElementById('profileEditor');
 const imagePopupCloseBtn = document.querySelector('.popup__image-close');
 const popupList = Array.from(document.querySelectorAll('.popup'));
+const cardTemplate = document.querySelector('.card-template').content;
+const imagePopupLink = document.querySelector('.popup__photo');
+const gridContainer = document.querySelector('.grid');
 const initialCards = [
   {
     name: 'Архыз',
@@ -43,10 +46,8 @@ const initialCards = [
 ];
 
 function getCardElement(name, link) {
-  const cardTemplate = document.querySelector('.card__template').content;
   const htmlElement = cardTemplate.cloneNode(true);
-  const imagePopupLink = document.querySelector('.popup__photo')
-  const imagePopupName = document.querySelector('.popup__name')
+  const imagePopupName = document.querySelector('.popup__name');
   htmlElement.querySelector('.card__image').setAttribute('src', link);
   htmlElement.querySelector('.card__image').setAttribute('alt', name);
   htmlElement.querySelector('.card__image').addEventListener('click', function(){
@@ -69,49 +70,48 @@ function getCardElement(name, link) {
 }
 
 initialCards.forEach((index) => {
-  const gridContainer = document.querySelector('.grid');
   renderCard(index.name, index.link, gridContainer)
 });
 
 function renderCard(name, link, block) {
   const gridCard = document.querySelectorAll('.grid__card');
   const gridCardArray = Array.from(gridCard); 
-  if (gridCardArray.length <= 5) {
-    block.append(getCardElement(name, link))
-  }
-  else {
-    block.prepend(getCardElement(name, link))
-  }
+  block.prepend(getCardElement(name, link))
 };
 
 function openPopup(popup) {
-  popup.classList.add('popup-opened');
+  popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupEsc)
 };
 
 function closePopup(popup) {
-  popup.classList.remove('popup-opened');
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupEsc)
+}
+
+function closePopupEsc(evt, popup=document.querySelector('.popup_opened')) {
+  if (evt.key === "Escape") { 
+    closePopup(popup); 
+  }; 
 }
 
 popupList.forEach((popup) => {
-  popup.addEventListener('click', function(evt) {
+  popup.addEventListener('mousedown', function(evt) {
     if (evt.target.classList[0] === "popup") {
       closePopup(popup);
-    };
-  });
-  document.addEventListener('keydown', function(evt) {
-    if (evt.key === "Escape") {
-      closePopup(popup);
-    };
+    };  
   });
 });
 
 function addPhoto(event) {
-  const gridContainer = document.querySelector('.grid');
+  const firstButton = document.querySelector('#photoButton');
   event.preventDefault();
   renderCard(inputNamePhoto.value, inputLink.value, gridContainer);
   closePopup(imageEditor);
   inputNamePhoto.value = "";
   inputLink.value = "";
+  firstButton.disabled = true;
+  firstButton.classList.add('popup__button_inactive')      
 };
 
 function saveChanges(event) {
