@@ -1,3 +1,6 @@
+import { Card } from "./Card.js";
+import { FormValidator } from "./FormValidator.js";
+
 const openProfile = document.querySelector('.menu__button');
 const closeProfile = document.querySelector('#imageEditorClose');
 const openWindowPopup = document.querySelector('.menu__edit');
@@ -7,7 +10,6 @@ const nameIn = document.querySelector('.menu__name');
 const description = document.querySelector('.menu__description');
 const inputName = document.querySelector('#name');
 const inputDescription = document.querySelector('#description');
-const submitPhoto = document.querySelector('#cardInf');
 const profileEditor = document.getElementById('profileEditor');
 const popupList = Array.from(document.querySelectorAll('.popup'));
 const submitPhotoButton = document.querySelector('#cardInf');
@@ -51,7 +53,7 @@ const config = {
 
 const forms = document.querySelectorAll(config.formSelector);
 
-function openPopup(popup) {
+export function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupEsc)
 };
@@ -67,11 +69,6 @@ function closePopupEsc(evt, popup=document.querySelector('.popup_opened')) {
   }; 
 }
 
-function addPhoto(event) {
-  event.preventDefault();
-  closePopup(imageEditor);
-};
-
 function saveChanges(event) { 
     event.preventDefault();
     nameIn.textContent = inputName.value;
@@ -79,14 +76,11 @@ function saveChanges(event) {
     closePopup(profileEditor);
 };
 
-import { Card } from "./Card.js";
-import { FormValidator } from "./FormValidator.js";
-
 submitPhotoButton.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const card = new Card(inputNamePhoto.value, inputLink.value, '.card-template');
-  card.getCardElement();
   card.renderCard();
+  closePopup(imageEditor);
   inputNamePhoto.value = "";
   inputLink.value = "";
   photoButton.disabled = true;
@@ -95,7 +89,6 @@ submitPhotoButton.addEventListener('submit', (evt) => {
 
 initialCards.forEach((index) => {
     index = new Card(index.name, index.link, '.card-template')
-    index.getCardElement();
     index.renderCard();
 });
 
@@ -104,7 +97,7 @@ forms.forEach((Form) => {
   newForm.enableValidation(Form);
 });
 
-submitPhoto.addEventListener('submit', addPhoto);
+
 
 openProfile.addEventListener('click', function () {
   openPopup(imageEditor);
@@ -128,9 +121,9 @@ profileForm.addEventListener('submit', saveChanges);
 
 popupList.forEach((popup) => { 
   popup.addEventListener('mousedown', function(evt) { 
-    if (evt.target.classList[0] === "popup") { 
+    if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
       closePopup(popup); 
-    };   
+    } 
   }); 
 }); 
 
