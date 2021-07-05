@@ -1,31 +1,28 @@
 export class FormValidator {
     constructor(data) {
         this._data = data;
-    }
+    };
 
     _showError(input) {
         input.classList.add(this._data.inputErrorClass)
         this._formError = document.querySelector(`.${input.id}-error`); 
         this._formError.textContent = input.validationMessage;
         profileButton.disabled = true;
-    }
+    };
     
     _hideError(input) {
         this._formError = document.querySelector(`.${input.id}-error`);
         input.classList.remove(this._data.inputErrorClass)
         this._formError.textContent = '';
-    }
+    };
 
-    _checkInputValidity(formElement) {
-        this._inputs = Array.from(formElement.querySelectorAll(this._data.inputSelector));
-        this._inputs.forEach((input) => {
-        if (!input.validity.valid) {
-            this._showError(input);
+    _checkInputValidity(inputElement) {              
+        if (!inputElement.validity.valid) {
+            this._showError(inputElement);
         }
         else {
-            this._hideError(input);
+            this._hideError(inputElement);
         }
-    })
     };
 
     _hasInvalidInput(formElement) {
@@ -33,7 +30,7 @@ export class FormValidator {
         return this._getInputList.some((inputElement) => {
           return !inputElement.validity.valid;
       })
-    }
+    };
 
     _checkButton(formElement) {
         this._button = formElement.querySelector(this._data.submitButtonSelector);
@@ -45,14 +42,17 @@ export class FormValidator {
             this._button.removeAttribute('disabled');
             this._button.classList.remove(this._data.inactiveButtonClass)
         }
-    }
+    };
 
     enableValidation(Form) {
-        Form.addEventListener('input', () => {
-            this._checkInputValidity(Form)
-            this._checkButton(Form);
-    })
-    }
+        this._getInputList = Array.from(Form.querySelectorAll(this._data.inputSelector));
+        this._getInputList.forEach((input) => {
+            input.addEventListener('input', () => {
+                this._checkInputValidity(input);
+                this._checkButton(Form);
+            })
+        })
+    };
 }
 
 
