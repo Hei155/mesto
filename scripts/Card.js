@@ -16,27 +16,43 @@ export class Card {
       this._block = document.querySelector('.grid');
       this._element.querySelector('.card__image').setAttribute('src', this._link);
       this._element.querySelector('.card__image').setAttribute('alt', this._name);
-      this._element.querySelector('.card__text').innerText = this._name; 
-      this._block.prepend(this._element);
+      this._element.querySelector('.card__text').innerText = this._name;
       this._setListeners();
+      this._setPopup();
+      return this._element;
     }
 
+    _setPopup() { 
+      this._popupLink = document.querySelector('.popup__photo'); 
+      this._popupName = document.querySelector('.popup__name'); 
+      this._popupLink.setAttribute('src', this._link); 
+      this._popupLink.setAttribute('alt', this._name); 
+      this._popupName.innerText = this._name; 
+  }; 
+
     _setLikeListener() {
-      this._cardButton.classList.toggle('card__button_is-active');
+        this._cardButton.classList.toggle('card__button_is-active');
       }
       
     _deleteCard() {
         this._card.remove()
       };
 
+    _handlePreviewPicture(popup) {
+      popup.classList.add('popup_opened');
+    };
+
     _setListeners() {
-        this._cardButton = document.querySelector('.card__button');
-        this._deletePic = document.querySelector('.card__delete');
-        this._card = document.querySelector('.grid__card')
+        this._popup = document.getElementById('imagePopup'); 
+        this._cardButton = this._element.querySelector('.card__button');
+        this._deletePic = this._element.querySelector('.card__delete');
+        this._card = this._element.querySelector('.grid__card')
         this._cardButton.addEventListener('click', () => 
           this._setLikeListener());
         this._deletePic.addEventListener('click', () => 
           this._deleteCard());
+        this._element.querySelector('.card__image').addEventListener('click', () => 
+          this._handlePreviewPicture(this._popup));
       };
   };
 

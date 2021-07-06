@@ -19,6 +19,7 @@ const inputLink = document.querySelector('#photo-link');
 const imagePopupCloseBtn = document.querySelector('.popup__image-close');
 const imagePopupLink = document.querySelector('.popup__photo'); 
 const imagePopupName = document.querySelector('.popup__name');
+const gridContainer = document.querySelector('.grid');
 
 const initialCards = [
   {
@@ -79,12 +80,9 @@ function saveChanges(event) {
     closePopup(profileEditor);
 };
 
-function setPopup(link, name) {
+function setPopup() {
   const cardImage = document.querySelector('.card__image');
   cardImage.addEventListener('click', () => { 
-      imagePopupLink.setAttribute('src', link); 
-      imagePopupLink.setAttribute('alt', name); 
-      imagePopupName.innerText = name; 
       openPopup(imagePopup);
   });
 };
@@ -92,9 +90,9 @@ function setPopup(link, name) {
 
 submitPhotoButton.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  const NewCard = new Card(inputNamePhoto.value, inputLink.value, '.card-template');
-  NewCard.getCardElement();
-  setPopup(inputLink.value, inputNamePhoto.value);
+  const newCard = new Card(inputNamePhoto.value, inputLink.value, '.card-template');
+  gridContainer.prepend(newCard.getCardElement());
+  setPopup();
   closePopup(imageEditor);
   inputNamePhoto.value = "";
   inputLink.value = "";
@@ -127,9 +125,9 @@ openWindowPopup.addEventListener('click', function () {
 profileForm.addEventListener('submit', saveChanges);
 
 initialCards.forEach((index) => {
-  const NewCard = new Card(index.name, index.link, '.card-template')
-  NewCard.getCardElement();
-  setPopup(index.link, index.name);
+  const newCard = new Card(index.name, index.link, '.card-template')
+  gridContainer.prepend(newCard.getCardElement());
+  setPopup();
 });
 
 forms.forEach((Form) => {
