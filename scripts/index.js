@@ -57,7 +57,7 @@ const config = {
 };
 const forms = document.querySelectorAll(config.formSelector);
 
-function openPopup(popup) {
+export function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupEsc)
 };

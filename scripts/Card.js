@@ -1,3 +1,5 @@
+import { openPopup } from "./index.js";
+
 export class Card {
   
     constructor(name, link , htmlSelector) {
@@ -18,7 +20,6 @@ export class Card {
       this._element.querySelector('.card__image').setAttribute('alt', this._name);
       this._element.querySelector('.card__text').innerText = this._name;
       this._setListeners();
-      this._setPopup();
       return this._element;
     }
 
@@ -27,7 +28,7 @@ export class Card {
       this._popupName = document.querySelector('.popup__name'); 
       this._popupLink.setAttribute('src', this._link); 
       this._popupLink.setAttribute('alt', this._name); 
-      this._popupName.innerText = this._name; 
+      this._popupName.textContent = this._name; 
   }; 
 
     _setLikeListener() {
@@ -38,8 +39,9 @@ export class Card {
         this._card.remove()
       };
 
-    _handlePreviewPicture(popup) {
-      popup.classList.add('popup_opened');
+    _handlePreviewPicture() {
+      this._setPopup();
+      openPopup(this._popup);
     };
 
     _setListeners() {
@@ -52,7 +54,7 @@ export class Card {
         this._deletePic.addEventListener('click', () => 
           this._deleteCard());
         this._element.querySelector('.card__image').addEventListener('click', () => 
-          this._handlePreviewPicture(this._popup));
+          this._handlePreviewPicture());
       };
   };
 
