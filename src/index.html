@@ -3,25 +3,24 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="pages/index.css">
         <title>Mesto</title>
     </head>
 <body>
     <div class="page">
         <header class="header">
-            <img src="images/Vector.svg" alt="Лого" class="header__logo">
+            <img src="<%=require('/images/Vector.svg')%>" alt="Лого" class="header__logo">
         </header>
         <main class="content">
             <section class="menu">
                 <div class="menu__panel">
                     <div class="menu__profile">
-                        <img src="images/Avatar.png" alt="Жак-Ив Кусто" class="menu__avatar">
+                        <img src="<%=require('/images/Avatar.png')%>" alt="Жак-Ив Кусто" class="menu__avatar">
                         <div class="menu__container">
                             <div class="menu__inf">
                                 <h1 class="menu__name">Жак-Ив Кусто</h1>
                                 <p class="menu__description">Исследователь океана</p>
                             </div>
-                            <button class="menu__edit" type="button"><img class="menu__edit-pic" src="images/Edit.svg" alt="Редактирование"></button>
+                            <button class="menu__edit" type="button"><img class="menu__edit-pic" src="<%=require('/images/Edit.svg')%>" alt="Редактирование"></button>
                         </div>
                     </div>
                     <button class="menu__button" type="button"></button>
@@ -80,13 +79,12 @@
     <template class="card-template">
         <div class="grid__card card"> 
             <img class="card__image" src="${element.link}" alt="${element.name}">
-            <button class="card__delete-button" type="button"><img class="card__delete" src="images/Delete.svg"></button>
+            <button class="card__delete-button" type="button"><img class="card__delete" src="<%=require('/images/Delete.svg')%>"></button>
             <div class="card__container"> 
               <h2 class="card__text">${element.name}</h2> 
               <button class="card__button card__button_is-active" type="button"></button> 
             </div> 
         </div>
     </template>
-    <script type="module" src="scripts/index.js"></script>
 </body>
 </html>
