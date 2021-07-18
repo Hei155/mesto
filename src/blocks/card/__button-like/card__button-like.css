@@ -1,4 +1,4 @@
-.card__button {
+.card__button-like {
     padding: 0;
     margin-right: 20px;
     padding-right: 20px;
@@ -11,6 +11,6 @@
     background: url(../../../images/buttonActive.svg) no-repeat;
 }
 
-.card__button:hover {
+.card__button-like:hover {
     opacity: .5;
 }
