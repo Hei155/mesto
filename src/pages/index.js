@@ -8,18 +8,19 @@ import { PopupWithForm } from "../components/PopupWithForm.js";
 import { UserInfo } from "../components/UserInfo.js";
 
 const imagePopup = document.getElementById('imagePopup'); 
-const openProfile = document.querySelector('.menu__button');
+const imageEditButton = document.querySelector('.menu__image-edit-button');
 const imageEditor = document.querySelector('#imageEditor');
-const profileEditButton = document.querySelector('.menu__edit');
+const profileEditButton = document.querySelector('.menu__profile-edit-button');
 const profileName = document.querySelector('.menu__name');
-const description = document.querySelector('.menu__description');
+const profileDescription = document.querySelector('.menu__description');
 const inputName = document.querySelector('#name');
 const inputDescription = document.querySelector('#description');
-const inputLink = document.querySelector('#photo-name');
-const inputPhotoName = document.querySelector('#photo-link');
+const inputLink = document.querySelector('#photo');
+const inputPhotoName = document.querySelector('#link');
 const profileEditor = document.querySelector('#profileEditor');
 const gridContainer = document.querySelector('.grid');
-const photoButton = document.querySelector('#photoButton');
+const profileForm = document.querySelector('#popupInformation')
+const imageForm = document.querySelector('#cardInformation');
 
 const initialCards = [
   {
@@ -75,36 +76,37 @@ const cardList = new Section({ data: initialCards, renderer: (initialCard) => {
 
 cardList.rendererItems();
 
-const userInfo = new UserInfo(profileName, description);
+const userInfo = new UserInfo(profileName, profileDescription);
 
 const profilePopup = new PopupWithForm(profileEditor, {submit: () => {
-  profileName.textContent = inputName.value;
-  description.textContent = inputDescription.value;
+  userInfo.setUserInfo(inputName.value,  inputDescription.value)
 }});
 
 profilePopup.setEventListeners();
 
 profileEditButton.addEventListener('click', function () {
-  userInfo.setUserInfo()
+  inputName.value = userInfo.getUserInfo().Name;
+  inputDescription.value = userInfo.getUserInfo().Description;
   profilePopup.open();
 });
+
+const imageFormValidation = new FormValidator(config, imageForm);
+imageFormValidation.enableValidation();
+const profileFormValidation = new FormValidator(config, profileForm);
+profileFormValidation.enableValidation();
 
 const cardPopup = new PopupWithForm(imageEditor, {submit: () => {
   setNewCard(cardPopup.inputValues.photoName, cardPopup.inputValues.photoDescription, '.card-template')
   inputLink.value = '';
   inputPhotoName.value = '';
-  photoButton.disabled = true;
-  photoButton.classList.add('popup__button_inactive');
+  imageFormValidation.disableSubmitButton();
 }});
 
 cardPopup.setEventListeners();
 
-openProfile.addEventListener('click', function () {
+imageEditButton.addEventListener('click', function () {
   cardPopup.open();
 })
 
-forms.forEach((form) => {
-  const newForm = new FormValidator(config, form)
-  newForm.enableValidation();
-});
+
 

@@ -16,14 +16,14 @@
                     <div class="menu__profile">
                         <img src="<%=require('./images/Avatar.png')%>" alt="Жак-Ив Кусто" class="menu__avatar">
                         <div class="menu__container">
-                            <div class="menu__inf">
+                            <div class="menu__information">
                                 <h1 class="menu__name">Жак-Ив Кусто</h1>
                                 <p class="menu__description">Исследователь океана</p>
                             </div>
-                            <button class="menu__edit" type="button"><img class="menu__edit-pic" src="<%=require('./images/Edit.svg')%>" alt="Редактирование"></button>
+                            <button class="menu__profile-edit-button" type="button"><img class="menu__edit-pic" src="<%=require('./images/Edit.svg')%>" alt="Редактирование"></button>
                         </div>
                     </div>
-                    <button class="menu__button" type="button"></button>
+                    <button class="menu__image-edit-button" type="button"></button>
                 </div>
             </section>
             <section class="pictures">
@@ -34,7 +34,7 @@
                 <div class="popup__container">
                     <button class="popup__container-close" type="button" id="profileEditorClose"></button>
                     <h2 class="popup__title">Редактировать профиль</h2>
-                    <form class="popup__form" name="profileForm" id="popupInf" novalidate>
+                    <form class="popup__form" name="profileForm" id="popupInformation" novalidate>
                         <label class="popup__field">
                             <input class="popup__input" id="name" name="name" type="text" value="" placeholder="Имя" required minlength="2" maxlength="40">
                             <span class="popup__input-error name-error"></span>
@@ -53,12 +53,12 @@
                     <h2 class="popup__title">Новое место</h2>
                     <form class="popup__form" name="photoInput" id="cardInformation" novalidate>
                         <label class="popup__field">
-                            <input class="popup__input" id="photo-name" name="photoName" type="text" value="" placeholder="Название" required minlength="2" maxlength="30">
-                            <span class="popup__input-error photo-name-error"></span>
+                            <input class="popup__input" id="photo" name="photoName" type="text" value="" placeholder="Название" required minlength="2" maxlength="30">
+                            <span class="popup__input-error photo-error"></span>
                             </label>
                         <label class="popup__field">
-                            <input class="popup__input" id="photo-link" name="photoDescription" type="url" value="" placeholder="Ссылка на картинку" required>
-                            <span class="popup__input-error photo-link-error"></span>
+                            <input class="popup__input" id="link" name="photoDescription" type="url" value="" placeholder="Ссылка на картинку" required>
+                            <span class="popup__input-error link-error"></span>
                         </label>
                         <button class="popup__button popup__button_inactive" type="submit" aria-label="Сохранить" id="photoButton">Создать</button>
                     </form>

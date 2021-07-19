@@ -12,12 +12,9 @@ export class UserInfo {
         return this._userData;
     };
 
-    setUserInfo() {
-        this._data = this.getUserInfo();
-        this._userNameInput = document.querySelector('#name');
-        this._userDescriptionInput = document.querySelector('#description');
-        this._userNameInput.textContent = this._data.Name;
-        this._userDescriptionInput.textContent = this._data.Description;
+    setUserInfo(name, description) {
+        this._userName.textContent = name;
+        this._userDescription.textContent = description;
     };
 
 }

@@ -33,14 +33,18 @@ export class FormValidator {
 
     _checkButton() {
         if (this._hasInvalidInput()) {
-            this._button.disabled = true;
-            this._button.classList.add(this._data.inactiveButtonClass)
+            this.disableSubmitButton();
         }
         else {
             this._button.removeAttribute('disabled');
-            this._button.classList.remove(this._data.inactiveButtonClass)
+            this._button.classList.remove(this._data.inactiveButtonClass);
         }
     };
+    
+    disableSubmitButton() {
+        this._button.disabled = true;
+        this._button.classList.add(this._data.inactiveButtonClass);
+    }
 
     enableValidation() {
         this._button = this._form.querySelector(this._data.submitButtonSelector);

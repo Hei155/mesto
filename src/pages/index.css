@@ -7,14 +7,14 @@
 @import url(../blocks/menu/menu.css);
 @import url(../blocks/menu/__profile/menu__profile.css);
 @import url(../blocks/menu/__avatar/menu__avatar.css);
-@import url(../blocks/menu/__edit/menu__edit.css);
+@import url(../blocks/menu/__profile-edit-button/menu__profile-edit-button.css);
 @import url(../blocks/menu/__edit-pic/menu__edit-pic.css);
 @import url(../blocks/menu/__panel/menu__panel.css);
 @import url(../blocks/menu/__name/menu__name.css);
 @import url(../blocks/menu/__description/menu__description.css);
-@import url(../blocks/menu/__button/menu__button.css);
+@import url(../blocks/menu/__image-edit-button/menu__image-edit-button.css);
 @import url(../blocks/menu/__container/menu__container.css);
-@import url(../blocks/menu/__inf/menu__inf.css);
+@import url(../blocks/menu/__information/menu__information.css);
 @import url(../blocks/grid/grid.css);
 @import url(../blocks/grid/__card/grid__card.css);
 @import url(../blocks/card/__button-like/card__button-like.css);
