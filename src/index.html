@@ -14,7 +14,10 @@
             <section class="menu">
                 <div class="menu__panel">
                     <div class="menu__profile">
-                        <img src="<%=require('./images/Avatar.png')%>" alt="Жак-Ив Кусто" class="menu__avatar">
+                        <div class="menu__pictures">
+                            <img src="#" alt="Жак-Ив Кусто" class="menu__avatar">
+                            <img src="<%=require('./images/editVector.svg')%>" alt="Редактировать" class="menu__photo-edit">
+                        </div>
                         <div class="menu__container">
                             <div class="menu__information">
                                 <h1 class="menu__name">Жак-Ив Кусто</h1>
@@ -53,11 +56,11 @@
                     <h2 class="popup__title">Новое место</h2>
                     <form class="popup__form" name="photoInput" id="cardInformation" novalidate>
                         <label class="popup__field">
-                            <input class="popup__input" id="photo" name="photoName" type="text" value="" placeholder="Название" required minlength="2" maxlength="30">
+                            <input class="popup__input" id="photo" name="name" type="text" value="" placeholder="Название" required minlength="2" maxlength="30">
                             <span class="popup__input-error photo-error"></span>
                             </label>
                         <label class="popup__field">
-                            <input class="popup__input" id="link" name="photoDescription" type="url" value="" placeholder="Ссылка на картинку" required>
+                            <input class="popup__input" id="link" name="description" type="url" value="" placeholder="Ссылка на картинку" required>
                             <span class="popup__input-error link-error"></span>
                         </label>
                         <button class="popup__button popup__button_inactive" type="submit" aria-label="Сохранить" id="photoButton">Создать</button>
@@ -71,6 +74,26 @@
                     <p class="popup__name"></p>
                 </div>
             </section>
+            <section class="popup" id="submitDelete">
+                <div class="popup__container">
+                    <button class="popup__container-close"></button>
+                    <h2 class="popup__title">Вы уверены?</h2>
+                    <button class="popup__button" id="deleteCardButton">Да</button>
+                </div>
+            </section>
+            <section class="popup" id="editPicture">
+                <div class="popup__container"> 
+                    <button class="popup__container-close"></button>
+                    <h2 class="popup__title">Обновить аватар</h2>
+                    <form class="popup__form" name="photoInput" id="avatarInformation" novalidate>
+                        <label class="popup__field">
+                            <input class="popup__input" id="profile" name="photoProfileName" type="url" value="" placeholder="Ссылка на картинку" required>
+                            <span class="popup__input-error profile-error"></span>
+                        </label>
+                        <button class="popup__button popup__button_inactive" type="submit" aria-label="Сохранить" id="profilePictureButton">Сохранить</button>
+                    </form>
+                </div>
+            </section>
         </main> 
         <footer class="footer">
             <p class="footer__text">&copy; 2020 Mesto Russia</p>
@@ -81,8 +104,11 @@
             <img class="card__image" src="${element.link}" alt="${element.name}">
             <button class="card__delete-button" type="button"><img class="card__delete" src="<%=require('./images/Delete.svg')%>"></button>
             <div class="card__container"> 
-              <h2 class="card__text">${element.name}</h2> 
-              <button class="card__button-like card__button-like_is-active" type="button"></button> 
+              <h2 class="card__text">${element.name}</h2>
+              <div class="card__likes">
+                <button class="card__button-like card__button-like_is-active" type="button"></button>
+                <span class="card__likes-number"></span>
+              </div>
             </div> 
         </div>
     </template>

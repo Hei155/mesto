@@ -6,8 +6,10 @@
 @import url(../blocks/content/content.css);
 @import url(../blocks/menu/menu.css);
 @import url(../blocks/menu/__profile/menu__profile.css);
+@import url(../blocks/menu/__pictures/menu__pictures.css);
 @import url(../blocks/menu/__avatar/menu__avatar.css);
 @import url(../blocks/menu/__profile-edit-button/menu__profile-edit-button.css);
+@import url(../blocks/menu/__photo-edit/menu__photo-edit.css);
 @import url(../blocks/menu/__edit-pic/menu__edit-pic.css);
 @import url(../blocks/menu/__panel/menu__panel.css);
 @import url(../blocks/menu/__name/menu__name.css);
@@ -19,9 +21,12 @@
 @import url(../blocks/grid/__card/grid__card.css);
 @import url(../blocks/card/__button-like/card__button-like.css);
 @import url(../blocks/card/__button-like/_is-active/card__button-like_is-active.css);
+@import url(../blocks/card/__likes/card__likes.css);
+@import url(../blocks/card/__likes-number/card__likes-number.css);
 @import url(../blocks/card/__container/card__container.css);
 @import url(../blocks/card/__delete/card__delete.css);
 @import url(../blocks/card/__delete-button/card__delete-button.css);
+@import url(../blocks/card/__delete-button/__delete-button_visible/card__delete-button_visible.css);
 @import url(../blocks/card/__image/card__image.css);
 @import url(../blocks/card/__text/card__text.css);
 @import url(../blocks/popup/popup.css);
