@@ -10,12 +10,7 @@ export class Api {
             method: 'GET',
             headers: this._headers
         })
-            .then(res => {
-                if (res.ok) {
-                    return res.json()
-                }
-                return Promise.reject(`Ошибка: ${res.status}`);
-            })
+            .then(this._handleResponse);
     };
     
     getInitialCards() {
@@ -23,12 +18,7 @@ export class Api {
             method: 'GET',
             headers: this._headers
         })
-            .then(res => {
-                if (res.ok) {
-                    return res.json()
-                }
-                return Promise.reject(`Ошибка: ${res.status}`);
-            })
+            .then(this._handleResponse);
     };
 
     setUserInfo(profileName, profileDescription) {
@@ -84,5 +74,12 @@ export class Api {
             headers: this._headers
         })
     };
+
+    _handleResponse(res) {
+        if (!res.ok) {
+          return Promise.reject(`Error: ${res.status}`);
+        }
+        return res.json();
+      }
 
 }
