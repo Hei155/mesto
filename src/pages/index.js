@@ -110,12 +110,8 @@ function setNewCard(cardInfo, cardSelector)  {
       })
   }})
   const cardElement = card.getCardElement(cardInfo);
-  const likeNumber = cardElement.querySelector('.card__likes-number');
-  const cardLikeButton = cardElement.querySelector('.card__button-like');
-  const cardDeleteButton = cardElement.querySelector('.card__delete-button');
   gridContainer.append(cardElement);
 };
-
 
 const userInfo = new UserInfo(profileName, profileDescription);
 
