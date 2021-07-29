@@ -41,26 +41,26 @@ const api = new Api({
   }
 });
 
-api.getUserData()
-  .then((res) => {
-    const newUserInfo = new UserInfo(profileName, profileDescription);
-    newUserInfo.setUserInfo(res.name, res.about);
-    avatarImage.src = res.avatar;
-  })
-  .catch((err) => {
-    console.log(err);
-  })
+let newUserInfo = null;
+let cardList = null;
 
-api.getInitialCards()
-  .then((res) => {
-    const cardList = new Section({ data: res, renderer: (card) => {
-      setNewCard(card, '.card-template');
+Promise.all([
+  api.getUserData(),
+  api.getInitialCards(),
+])
+  .then(([userData, initialCards]) => {
+    newUserInfo = new UserInfo(profileName, profileDescription);
+    newUserInfo.setUserInfo(userData.name, userData.about);
+    avatarImage.src = userData.avatar;
+    console.log(initialCards)
+    cardList = new Section({ data: initialCards, renderer: (card) => {
+    setNewCard(card, userData, '.card-template');
     }}, '.grid');
-  cardList.rendererItems();
+    cardList.rendererItems();
   })
   .catch((err) => {
     console.log(err);
-  })
+  }); 
 
 const config = {
   formSelector: '.popup__form',
@@ -83,33 +83,38 @@ function renderLoading(isLoading, button) {
 
 const popupImage  = new PopupWithImage(imagePopup);
 
-function setNewCard(cardInfo, cardSelector)  {
+let popupWithButton = null;
+
+function setNewCard(cardInfo, userInfo, cardSelector)  {
   const card = new Card(cardInfo.name, cardInfo.link, cardSelector, {handleCardClick: () => {
     popupImage.open(cardInfo.name, cardInfo.link);
     popupImage.setEventListeners();
-  }},
-  {handleDeleteButtonClick: () => {
-    const popupWithButton = new PopupWithButton(submitDeletePopup, {submit: () => {
+  },
+  handleDeleteButtonClick: () => {
+    popupWithButton = new PopupWithButton(submitDeletePopup, {submit: () => {
       card.deleteCard();    
       api.deleteCard(cardInfo._id)
       popupWithButton.close();
     }});
     popupWithButton.open();
     popupWithButton.setEventListeners();
-  }},
-  {handleSetLike: () => {
+  },
+  handleSetLike: () => {
     api.setLike(cardInfo._id)
-      .catch((err) => {
-        console.log(err);
+      .then(() => {
+        card. cardButtonLike.classList.toggle('card__button-like_is-active');
+        card.likeNumber.textContent = Number(card.likeNumber.textContent) + 1;
       })
-  }},
-  {handleRemoveLike: () => {
+  },
+  handleRemoveLike: () => {
     api.deleteLike(cardInfo._id)
-      .catch((err) => {
-        console.log(err);
+      .then(() => {
+        card.cardButtonLike.classList.toggle('card__button-like_is-active');
+        card.likeNumber.textContent = Number(card.likeNumber.textContent) - 1;
       })
-  }})
-  const cardElement = card.getCardElement(cardInfo);
+  }}
+)
+  const cardElement = card.getCardElement(cardInfo, userInfo);
   gridContainer.append(cardElement);
 };
 
@@ -120,9 +125,10 @@ const profilePopup = new PopupWithForm(profileEditor, {submit: () => {
   api.setUserInfo(inputName.value, inputDescription.value)
     .then(() => {
       userInfo.setUserInfo(inputName.value,  inputDescription.value);
+      profilePopup.close();
     })
     .catch(() => {
-      console.log(console.log(err))
+      console.log((err))
     })
     .finally(() => {
       renderLoading(false, profileButton);
@@ -132,8 +138,8 @@ const profilePopup = new PopupWithForm(profileEditor, {submit: () => {
 profilePopup.setEventListeners();
 
 profileEditButton.addEventListener('click', function () {
-  inputName.value = userInfo.getUserInfo().Name;
-  inputDescription.value = userInfo.getUserInfo().Description;
+  inputName.value = userInfo.getUserInfo().name;
+  inputDescription.value = userInfo.getUserInfo().description;
   profilePopup.open();
 });
 
@@ -142,6 +148,7 @@ const newPicturePopup = new PopupWithForm(editAvatarPopup, {submit: () => {
   api.setNewAvatar(inputAvatarLink.value)
     .then(() => {
       avatarImage.setAttribute('src', inputAvatarLink.value);
+      newPicturePopup.close();
     })
     .catch((err) => {
       console.log(err);
@@ -165,20 +172,23 @@ profileFormValidation.enableValidation();
 
 const cardPopup = new PopupWithForm(imageEditor, {submit: () => {
   renderLoading(true, photoButton)
-  api.setCard(cardPopup.inputValues.name, cardPopup.inputValues.description)
-    .then(() => {
-      api.getInitialCards()
-        .then((res) => {
-          const card = res[0];
-          setNewCard(card, '.card-template');
-          inputLink.value = '';
-          inputPhotoName.value = '';
-          imageFormValidation.disableSubmitButton();
-        })
-        .finally(() => {
-          renderLoading(false, photoButton);
-        })
-    });
+  Promise.all([
+    api.getUserData(),
+    api.setCard(cardPopup.inputValues.name, cardPopup.inputValues.description),
+  ])
+    .then(([userData, cardData]) => {
+      setNewCard(cardData, userData, '.card-template');
+      cardPopup.close()
+      inputLink.value = '';
+      inputPhotoName.value = '';
+      imageFormValidation.disableSubmitButton();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      renderLoading(false, photoButton);
+    })
 }});
 
 cardPopup.setEventListeners();

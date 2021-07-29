@@ -40,8 +40,9 @@ export class Api {
             body: JSON.stringify({
                 name: cardName,
                 link: cardLink
-            })
+            })     
         })
+            .then(this._handleResponse);
     };
 
     setLike(cardId) {
