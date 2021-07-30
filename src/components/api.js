@@ -50,6 +50,7 @@ export class Api {
             method: 'PUT',
             headers: this._headers
         })
+            .then(this._handleResponse);
     };
 
     deleteLike(cardId) {
@@ -57,6 +58,7 @@ export class Api {
             method: 'DELETE',
             headers: this._headers
         })
+            .then(this._handleResponse);
     };
 
     setNewAvatar(avatarUrl) {

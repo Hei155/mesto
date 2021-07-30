@@ -43,16 +43,17 @@ const api = new Api({
 
 let newUserInfo = null;
 let cardList = null;
+let userDataInfo = null;
 
 Promise.all([
   api.getUserData(),
   api.getInitialCards(),
 ])
   .then(([userData, initialCards]) => {
+    userDataInfo = userData;
     newUserInfo = new UserInfo(profileName, profileDescription);
     newUserInfo.setUserInfo(userData.name, userData.about);
     avatarImage.src = userData.avatar;
-    console.log(initialCards)
     cardList = new Section({ data: initialCards, renderer: (card) => {
     setNewCard(card, userData, '.card-template');
     }}, '.grid');
@@ -101,16 +102,14 @@ function setNewCard(cardInfo, userInfo, cardSelector)  {
   },
   handleSetLike: () => {
     api.setLike(cardInfo._id)
-      .then(() => {
-        card. cardButtonLike.classList.toggle('card__button-like_is-active');
-        card.likeNumber.textContent = Number(card.likeNumber.textContent) + 1;
+      .then((res) => {
+        card.addLike(res);
       })
   },
   handleRemoveLike: () => {
     api.deleteLike(cardInfo._id)
-      .then(() => {
-        card.cardButtonLike.classList.toggle('card__button-like_is-active');
-        card.likeNumber.textContent = Number(card.likeNumber.textContent) - 1;
+      .then((res) => {
+        card.removeLike(res);
       })
   }}
 )
@@ -125,6 +124,7 @@ const profilePopup = new PopupWithForm(profileEditor, {submit: () => {
   api.setUserInfo(inputName.value, inputDescription.value)
     .then(() => {
       userInfo.setUserInfo(inputName.value,  inputDescription.value);
+      profilePopup.getInputValues();
       profilePopup.close();
     })
     .catch(() => {
@@ -148,6 +148,7 @@ const newPicturePopup = new PopupWithForm(editAvatarPopup, {submit: () => {
   api.setNewAvatar(inputAvatarLink.value)
     .then(() => {
       avatarImage.setAttribute('src', inputAvatarLink.value);
+      newPicturePopup.getInputValues();
       newPicturePopup.close();
     })
     .catch((err) => {
@@ -172,12 +173,10 @@ profileFormValidation.enableValidation();
 
 const cardPopup = new PopupWithForm(imageEditor, {submit: () => {
   renderLoading(true, photoButton)
-  Promise.all([
-    api.getUserData(),
-    api.setCard(cardPopup.inputValues.name, cardPopup.inputValues.description),
-  ])
-    .then(([userData, cardData]) => {
-      setNewCard(cardData, userData, '.card-template');
+  cardPopup.getInputValues();
+  api.setCard(cardPopup.getInputValues().name, cardPopup.getInputValues().description)
+    .then((cardData) => {
+      setNewCard(cardData, userDataInfo, '.card-template');
       cardPopup.close()
       inputLink.value = '';
       inputPhotoName.value = '';
