@@ -119,11 +119,11 @@ function setNewCard(cardInfo, userInfo, cardSelector)  {
 
 const userInfo = new UserInfo(profileName, profileDescription);
 
-const profilePopup = new PopupWithForm(profileEditor, {submit: () => {
+const profilePopup = new PopupWithForm(profileEditor, {submit: (inputData) => {
   renderLoading(true, profileButton);
-  api.setUserInfo(inputName.value, inputDescription.value)
+  api.setUserInfo(inputData.name, inputData.description)
     .then(() => {
-      userInfo.setUserInfo(inputName.value,  inputDescription.value);
+      userInfo.setUserInfo(inputData.name,  inputData.description);
       profilePopup.getInputValues();
       profilePopup.close();
     })
@@ -171,10 +171,9 @@ imageFormValidation.enableValidation();
 const profileFormValidation = new FormValidator(config, profileForm);
 profileFormValidation.enableValidation();
 
-const cardPopup = new PopupWithForm(imageEditor, {submit: () => {
+const cardPopup = new PopupWithForm(imageEditor, {submit: (inputData) => {
   renderLoading(true, photoButton)
-  cardPopup.getInputValues();
-  api.setCard(cardPopup.getInputValues().name, cardPopup.getInputValues().description)
+  api.setCard(inputData.name, inputData.description)
     .then((cardData) => {
       setNewCard(cardData, userDataInfo, '.card-template');
       cardPopup.close()
